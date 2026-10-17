@@ -10,8 +10,6 @@
 #
 # Exit 0: ok. Anything else: failed, and the output says why.
 #
-# This file comes from the stack-less template. Replace the TODO blocks with the project's commands;
-# the examples below are a starting point.
 
 set -euo pipefail
 
@@ -20,26 +18,12 @@ shift || true
 
 case "$mode" in
 quick)
-  # TODO: the project's fast checks. Examples (keep one, uncommented, or write your own):
-  #   Go:      go vet ./... && golangci-lint run --new-from-rev=HEAD && go test ./...
-  #   Java:    ./gradlew test        (Maven: mvn -q test)
-  #   Node/TS: npx tsc --noEmit && npx eslint "$@" && npx vitest related --run "$@"
-  #            (if the tests drive the app in a child process, `related` finds none: run the suite)
-  #   Python:  ruff check "$@" && ruff format --check "$@" && mypy "$@" && pytest -q
-  #            (with uv, prefix each command with `uv run`)
-  #   Rust:    cargo clippy --all-targets -- -D warnings && cargo test
-  echo "verify.sh: quick mode is not configured yet (edit scripts/verify.sh)." >&2
-  exit 0
+  go vet ./... && golangci-lint run --new-from-rev=HEAD && go test ./...
   ;;
 full)
-  # TODO: the full verification, same as CI. Examples:
-  #   Go:      go vet ./... && golangci-lint run && go test -race ./...
-  #   Java:    ./gradlew check       (Maven: mvn -q verify)
-  #   Node/TS: npx tsc --noEmit && npx eslint . && npx vitest run --coverage
-  #   Python:  ruff check . && ruff format --check . && mypy . && pytest --cov
-  #   Rust:    cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test
-  echo "verify.sh: full mode is not configured yet (edit scripts/verify.sh)." >&2
-  exit 1
+  unformatted=$(gofmt -l .)
+  [[ -z "$unformatted" ]] || { printf 'gofmt: run gofmt -w on:\n%s\n' "$unformatted" >&2; exit 1; }
+  go vet ./... && golangci-lint run && go test -race ./...
   ;;
 *)
   echo "usage: scripts/verify.sh quick <files...> | full [<app>]" >&2

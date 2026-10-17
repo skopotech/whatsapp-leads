@@ -3,8 +3,8 @@
 # [tools] for the language and the tools verify.sh calls (linters, package managers).
 # A new or changed mise.toml must be trusted once per machine: `mise trust`.
 [tools]
-# go = "1.26"
-# golangci-lint = "2"
+go = "1.26"
+golangci-lint = "2"
 # java = "21"
 # node = "22"
 # pnpm = "10"
