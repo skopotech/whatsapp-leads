@@ -1,0 +1,8 @@
+# Harness changes go through whoever owns the process. Replace with the GitHub user or team.
+/.agents/skills/   @skopotech/sys4web
+/.claude/          @skopotech/sys4web
+/scripts/verify.sh @skopotech/sys4web
+/REVIEW.md         @skopotech/sys4web
+/CODING_STANDARDS.md @skopotech/sys4web
+/docs/workflow.md  @skopotech/sys4web
+/.github/          @skopotech/sys4web
